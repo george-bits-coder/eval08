@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+
+<style>
+
+body{
+
+    text-align:center;
+    justify-content:center;
+    align-items:center;
+
+   
+}
+button{
+
+   background-color:cyan;
+   color:white;
+   cursor:pointer;
+}
+img{
+    object-fit:contain;
+}
+div>div{
+    border:1px solid cyan;
+    text-align:center;
+    width:70%;
+}
+</style>
+</head>
+<body>
+    <h1>Menu</h1>
+   <div id="container"></div> 
+</body>
+<script>
+var big=document.getElementById("container");
+for(var i=0;i<15;i++)
+{
+
+    fetch("https://www.themealdb.com/api/json/v1/1/random.php").then(function(res){
+        return res.json();
+    }).then(function(res){
+        
+        console.log(res);
+        var meal=res["meals"];
+        var titl=meal[0]["strMeal"];
+        var image=meal[0]["strMealThumb"];
+        var price=meal[0]["idMeal"];
+        price=Number(price);
+        price=price/100;
+        var desc=meal[0]["strInstructions"];
+
+        var card=document.createElement("div");
+        var p1=document.createElement("h2");
+        p1.textContent=titl;
+
+        var p2=document.createElement("p");
+        p2.textContent=" Price : Rs "+ price;
+
+        var ima=document.createElement("img");
+        ima.src=image;
+        ima.style.height="300px";
+        var descc=document.createElement("p");
+        descc.textContent=desc;
+
+        var but=document.createElement("button");
+        but.textContent="Add to cart";
+        card.append(p1);
+       
+        card.append(ima);
+        card.append(p2);
+        card.append(but);
+        card.append(descc);
+        big.appendChild(card);
+      //  console.log(price);
+
+    }).catch(function(err){
+
+        console.log(err);
+    });
+
+    
+}
+</script>
+</html>

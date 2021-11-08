@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+</head>
+<body>
+  <form id="login" onsubmit="log_in(event)">
+     
+    
+     <input type="text" id="username" placeholder="userame"/> </br>
+     <input type="password" id="password" placeholder="password"/></br> 
+     <input type="submit"/> 
+    </form>
+</body>
+<script>
+
+    function log_in(e){
+            e.preventDefault();
+            var forml=document.getElementById("login");
+
+            var data={
+               
+              
+               username:forml.username.value,
+               password:forml.password.value,
+
+
+            }
+        data=JSON.stringify(data);
+          
+
+        fetch("https://masai-api-mocker.herokuapp.com/auth/login",{
+
+            method:'POST',
+            body:data,
+            headers:{'Content-Type': 'application/json'}
+            
+        }).then(res=>res.json()).then(res=>console.log(res));
+
+    }
+
+</script>
+</html>
